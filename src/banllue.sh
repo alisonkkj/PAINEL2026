@@ -23,13 +23,13 @@ tela_boot() {
     clear
     echo -e "${CIANO}[INIT] Carregando modulos de sistema...${RESET}"
     sleep 0.7
-    echo -e "${AZUL}[SECURE] Estabelecendo conexao segura...${RESET}"
+    echo -e "${AZUL}[SECURE] Estabelecendo conexao wifi segura...${RESET}"
     sleep 0.8
     echo -e "${VERDE}[PROXY] Verificando gateways ativos...${RESET}"
     sleep 0.9
     echo -e "${AMARELO}[AUTH] Validando banco de dados local...${RESET}"
     sleep 0.8
-    echo -e "${VERMELHO}[STATUS] Sistema pronto e operacional.${RESET}"
+    echo -e "${VERMELHO}[STATUS] Sistema liberado e operacional.${RESET}"
     sleep 1.2
     clear
 }
@@ -40,7 +40,7 @@ autenticar_cliente() {
     echo -e "${AZUL}╔══════════════════════════════════════════════════╗${RESET}"
     echo -e "${AZUL}║             AUTENTICACAO DE LICENCA              ║${RESET}"
     echo -e "${AZUL}╚══════════════════════════════════════════════════╝${RESET}"
-    echo -e "${AMARELO}Insira a chave VIP enviada pelo administrador.${RESET}\n"
+    echo -e "${AMARELO}Insira a chave enviada pelo administrador.${RESET}\n"
     
     read -p "$(echo -e "${CIANO}>> Digite sua Chave de Acesso: ${RESET}")" KEY
 
