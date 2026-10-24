@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==================================================
-# PAINEL BANWHATS PRO - ELITE EDITION V4.1
+# PAINEL BANWHATS PRO - ELITE EDITION V4.2
 # Desenvolvido por: ALISONKKJJ YT
 # ==================================================
 
@@ -25,11 +25,11 @@ tela_boot() {
     sleep 0.7
     echo -e "${AZUL}[SECURE] Estabelecendo túnel criptografado AES-256-GCM...${RESET}"
     sleep 0.8
-    echo -e "${VERDE}[PROXY] Conectando a nós de relay globais (Cloudflare / Meta API Gateway)...${RESET}"
+    echo -e "${VERDE}[PROXY] Conectando a nós globais de relay (Cloudflare / Meta API)...${RESET}"
     sleep 0.9
-    echo -e "${AMARELO}[AUTH] Verificando integridade do banco de dados de chaves JSON...${RESET}"
+    echo -e "${AMARELO}[AUTH] Verificando integridade da base de chaves JSON...${RESET}"
     sleep 0.8
-    echo -e "${VERMELHO}[STATUS] Sistema blindado e pronto. Iniciando ambiente seguro.${RESET}"
+    echo -e "${VERMELHO}[STATUS] Sistema blindado e operacional.${RESET}"
     sleep 1.2
     clear
 }
@@ -96,7 +96,7 @@ show_logo() {
 input_numero() {
     local texto_custom=$1
     while true; do
-        read -p "$(echo -e "${CIANO}$texto_custom${RESET}")" numero
+        read -p "$(echo -e "${CIANO}$texto_custom ${RESET}")" numero
         if [[ "$numero" =~ ^[0-9]{10,15}$ ]]; then
             break
         else
@@ -121,22 +121,21 @@ simular_logs_rede() {
     local alvo=$1
     echo -e "\n${CIANO}[CONNECT] Conectando ao gateway seguro da API v2...${RESET}"
     sleep 1.2
-    echo -e "${VERDE}[PROXY] Rota de saída estabelecida via IP: $(shuf -i 100-200 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 1-250 -n 1) [ALTA SEGURANÇA]${RESET}"
+    echo -e "${VERDE}[PROXY] Rota estabelecida via IP: $(shuf -i 100-200 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 1-250 -n 1) [ALTA SEGURANÇA]${RESET}"
     sleep 1.5
-    echo -e "${AMARELO}[PAYLOAD] Injetando pacotes de bypass e forçando requisição para: $alvo...${RESET}"
+    echo -e "${AMARELO}[PAYLOAD] Injetando pacotes de bypass para o alvo: $alvo...${RESET}"
     sleep 1.8
 }
 
-# Spinner mais longo e detalhado para prender a atenção no vídeo (45 segundos)
 spinner() {
-    local duration=45
+    local duration=30
     local elapsed=0
     local spin='-\|/'
 
     while [ $elapsed -lt $duration ]; do
         for i in $(seq 0 3); do
             local pct=$(( (elapsed * 100) / duration ))
-            printf "\r${AMARELO}[+] Processando requisições profundas [%-20s] %d%% %c${RESET}" "$(printf '#%.0s' $(seq 1 $((pct / 5))))" "$pct" "${spin:$i:1}"
+            printf "\r${AMARELO}[+] Processando requisições [%-20s] %d%% %c${RESET}" "$(printf '#%.0s' $(seq 1 $((pct / 5))))" "$pct" "${spin:$i:1}"
             sleep 1
             ((elapsed++))
             [ $elapsed -ge $duration ] && break
@@ -159,7 +158,7 @@ abrir_youtube() {
 banir_whatsapp() {
     clear
     echo -e "${VERMELHO}[ PAINEL - BANIR WHATSAPP ]${RESET}"
-    input_numero "Digite o número alvo do WhatsApp (com DDD, ex: 5511999998888): "
+    input_numero "Digite o número alvo do WhatsApp (com DDD):"
     simular_logs_rede "$numero"
     spinner
     salvar_log "BAN_WHATSAPP" "$numero"
@@ -172,7 +171,7 @@ banir_whatsapp() {
 desbanir_whatsapp() {
     clear
     echo -e "${VERDE}[ PAINEL - DESBANIR WHATSAPP ]${RESET}"
-    input_numero "Digite o número que deseja desbanir (com DDD, ex: 5511999998888): "
+    input_numero "Digite o número que deseja desbanir (com DDD):"
     simular_logs_rede "$numero"
     spinner
     salvar_log "DESBAN_WHATSAPP" "$numero"
@@ -184,12 +183,12 @@ desbanir_whatsapp() {
 blindar_whatsapp() {
     clear
     echo -e "${CIANO}[ PAINEL - BLINDAGEM ANTI-BAN ]${RESET}"
-    input_numero "Digite o número que vai receber a blindagem (com DDD): "
+    input_numero "Digite o número para aplicar a blindagem (com DDD):"
     simular_logs_rede "$numero"
     spinner
     salvar_log "BLINDAGEM_WHATSAPP" "$numero"
     echo -e "${VERDE}✅ Escudo de segurança anti-ban ativado para $numero!${RESET}"
-    echo -e "${AMARELO}ℹ️ O número agora possui proteção ativa contra quedas e spam.${RESET}"
+    echo -e "${AMARELO}ℹ️ O número agora possui proteção contra quedas e spam.${RESET}"
     pausa
 }
 
@@ -231,7 +230,7 @@ while true; do
     echo -e "${CIANO}  6) 🎬 Canal do YouTube (@alisonkkj)${RESET}"
     echo -e "${VERMELHO}  7) ❌ Sair do Painel${RESET}"
     echo
-    read -p "$(echo -e "${CIANO}>> Opção: ${RESET})" opcao
+    read -p "$(echo -e "${CIANO}>> Opção: ${RESET}")" opcao
 
     case $opcao in
         1) banir_whatsapp ;;
