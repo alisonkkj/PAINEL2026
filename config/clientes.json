@@ -1,0 +1,23 @@
+{
+  "FLASH-8585-VIP": {
+    "nome": "VIP FLASH (R$ 85,00)",
+    "valor": "85.00",
+    "tempo": "Imediato",
+    "status": "Ativo",
+    "mensagem_ban": "Processo imediato em execução. Alvo na fila prioritária."
+  },
+  "EXPRESS-6060-VIP": {
+    "nome": "VIP EXPRESS (R$ 60,00)",
+    "valor": "60.00",
+    "tempo": "5 horas",
+    "status": "Ativo",
+    "mensagem_ban": "Alvo agendado para banimento em até 5 horas."
+  },
+  "STANDARD-3535-VIP": {
+    "nome": "VIP STANDARD (R$ 35,00)",
+    "valor": "35.00",
+    "tempo": "24 horas",
+    "status": "Ativo",
+    "mensagem_ban": "Alvo agendado para banimento em até 24 horas."
+  }
+}
