@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==================================================
-# PAINEL BANWHATS PRO - ELITE EDITION V4.0
+# PAINEL BANWHATS PRO - ELITE EDITION V4.1
 # Desenvolvido por: ALISONKKJJ YT
 # ==================================================
 
@@ -21,16 +21,16 @@ LOG_FILE="historico_execucao.log"
 # --- TELA DE BOOT HACKER ---
 tela_boot() {
     clear
-    echo -e "${CIANO}[INIT] Carregando módulos de segurança do kernel...${RESET}"
-    sleep 0.4
-    echo -e "${AZUL}[SECURE] Estabelecendo túnel criptografado AES-256...${RESET}"
-    sleep 0.5
-    echo -e "${VERDE}[PROXY] Conectando a nós de relay globais (Cloudflare / Meta API)...${RESET}"
-    sleep 0.6
-    echo -e "${AMARELO}[AUTH] Verificando integridade do banco de dados de chaves...${RESET}"
-    sleep 0.5
-    echo -e "${VERMELHO}[STATUS] Sistema pronto. Iniciando ambiente seguro.${RESET}"
+    echo -e "${CIANO}[INIT] Carregando módulos de segurança do kernel v6.8...${RESET}"
+    sleep 0.7
+    echo -e "${AZUL}[SECURE] Estabelecendo túnel criptografado AES-256-GCM...${RESET}"
     sleep 0.8
+    echo -e "${VERDE}[PROXY] Conectando a nós de relay globais (Cloudflare / Meta API Gateway)...${RESET}"
+    sleep 0.9
+    echo -e "${AMARELO}[AUTH] Verificando integridade do banco de dados de chaves JSON...${RESET}"
+    sleep 0.8
+    echo -e "${VERMELHO}[STATUS] Sistema blindado e pronto. Iniciando ambiente seguro.${RESET}"
+    sleep 1.2
     clear
 }
 
@@ -94,19 +94,20 @@ show_logo() {
 }
 
 input_numero() {
+    local texto_custom=$1
     while true; do
-        read -p "$(echo -e "${CIANO}Digite o número alvo (apenas dígitos com DDD, ex: 5511999998888): ${RESET}")" numero
+        read -p "$(echo -e "${CIANO}$texto_custom${RESET}")" numero
         if [[ "$numero" =~ ^[0-9]{10,15}$ ]]; then
             break
         else
-            echo -e "${VERMELHO}❌ Número inválido. Tente novamente.${RESET}"
+            echo -e "${VERMELHO}❌ Número inválido. Digite com DDD (Ex: 5511999998888).${RESET}"
         fi
     done
 }
 
 input_instagram() {
     while true; do
-        read -p "$(echo -e "${CIANO}Digite o usuário do Instagram (ex: usuario123): ${RESET}")" usuario
+        read -p "$(echo -e "${CIANO}Digite o @ do usuário do Instagram alvo: ${RESET}")" usuario
         usuario="${usuario#@}"
         if [[ -n "$usuario" && ! "$usuario" =~ [[:space:]] ]]; then
             break
@@ -118,29 +119,30 @@ input_instagram() {
 
 simular_logs_rede() {
     local alvo=$1
-    echo -e "\n${CIANO}[CONNECT] Conectando ao gateway seguro da API...${RESET}"
-    sleep 0.6
-    echo -e "${VERDE}[PROXY] IP Atribuído: $(shuf -i 100-200 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 1-250 -n 1) [ESTÁVEL]${RESET}"
-    sleep 0.6
-    echo -e "${AMARELO}[PAYLOAD] Injetando pacotes de requisição para o alvo: $alvo...${RESET}"
-    sleep 0.8
+    echo -e "\n${CIANO}[CONNECT] Conectando ao gateway seguro da API v2...${RESET}"
+    sleep 1.2
+    echo -e "${VERDE}[PROXY] Rota de saída estabelecida via IP: $(shuf -i 100-200 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 10-99 -n 1).$(shuf -i 1-250 -n 1) [ALTA SEGURANÇA]${RESET}"
+    sleep 1.5
+    echo -e "${AMARELO}[PAYLOAD] Injetando pacotes de bypass e forçando requisição para: $alvo...${RESET}"
+    sleep 1.8
 }
 
+# Spinner mais longo e detalhado para prender a atenção no vídeo (45 segundos)
 spinner() {
-    local duration=$1
+    local duration=45
     local elapsed=0
     local spin='-\|/'
 
     while [ $elapsed -lt $duration ]; do
         for i in $(seq 0 3); do
             local pct=$(( (elapsed * 100) / duration ))
-            printf "\r${AMARELO}[+] Processando requisições [%-20s] %d%% %c${RESET}" "$(printf '#%.0s' $(seq 1 $((pct / 5))))" "$pct" "${spin:$i:1}"
-            sleep 0.5
+            printf "\r${AMARELO}[+] Processando requisições profundas [%-20s] %d%% %c${RESET}" "$(printf '#%.0s' $(seq 1 $((pct / 5))))" "$pct" "${spin:$i:1}"
+            sleep 1
             ((elapsed++))
             [ $elapsed -ge $duration ] && break
         done
     done
-    echo -e "\r${VERDE}✔ Operação concluída com sucesso na API de destino!                    ${RESET}\n"
+    echo -e "\r${VERDE}✔ Operação concluída com sucesso na API de destino!                                      ${RESET}\n"
 }
 
 pausa() {
@@ -157,12 +159,12 @@ abrir_youtube() {
 banir_whatsapp() {
     clear
     echo -e "${VERMELHO}[ PAINEL - BANIR WHATSAPP ]${RESET}"
-    input_numero
+    input_numero "Digite o número alvo do WhatsApp (com DDD, ex: 5511999998888): "
     simular_logs_rede "$numero"
-    spinner 20
+    spinner
     salvar_log "BAN_WHATSAPP" "$numero"
     echo -e "${VERDE}✅ Procedimento Executado com Sucesso!\n"
-    echo -e "${BRANCO}O número $numero foi inserido na fila de processamento.${RESET}"
+    echo -e "${BRANCO}O número $numero foi injetado na fila de processamento prioritário.${RESET}"
     echo -e "${AMARELO}ℹ️ Detalhes do Plano: $MSG_BAN${RESET}"
     pausa
 }
@@ -170,24 +172,24 @@ banir_whatsapp() {
 desbanir_whatsapp() {
     clear
     echo -e "${VERDE}[ PAINEL - DESBANIR WHATSAPP ]${RESET}"
-    input_numero
+    input_numero "Digite o número que deseja desbanir (com DDD, ex: 5511999998888): "
     simular_logs_rede "$numero"
-    spinner 20
+    spinner
     salvar_log "DESBAN_WHATSAPP" "$numero"
-    echo -e "${VERDE}✅ Solicitação de reversão enviada para $numero!${RESET}"
-    echo -e "${AMARELO}ℹ️ Prazo estimado de liberação: $PRAZO_PLANO${RESET}"
+    echo -e "${VERDE}✅ Solicitação de reversão de banimento enviada para $numero!${RESET}"
+    echo -e "${AMARELO}ℹ️ Prazo estimado de liberação na base: $PRAZO_PLANO${RESET}"
     pausa
 }
 
 blindar_whatsapp() {
     clear
     echo -e "${CIANO}[ PAINEL - BLINDAGEM ANTI-BAN ]${RESET}"
-    input_numero
+    input_numero "Digite o número que vai receber a blindagem (com DDD): "
     simular_logs_rede "$numero"
-    spinner 20
+    spinner
     salvar_log "BLINDAGEM_WHATSAPP" "$numero"
-    echo -e "${VERDE}✅ Escudo de segurança ativado para $numero!${RESET}"
-    echo -e "${AMARELO}ℹ️ O número agora está protegido contra quedas e spam.${RESET}"
+    echo -e "${VERDE}✅ Escudo de segurança anti-ban ativado para $numero!${RESET}"
+    echo -e "${AMARELO}ℹ️ O número agora possui proteção ativa contra quedas e spam.${RESET}"
     pausa
 }
 
@@ -196,9 +198,9 @@ banir_instagram() {
     echo -e "${ROXO}[ PAINEL - BANIR INSTAGRAM ]${RESET}"
     input_instagram
     simular_logs_rede "@$usuario"
-    spinner 20
+    spinner
     salvar_log "BAN_INSTAGRAM" "@$usuario"
-    echo -e "${VERDE}✅ Procedimento de denúncia em massa concluído!${RESET}"
+    echo -e "${VERDE}✅ Procedimento de denúncia em massa concluído com sucesso!${RESET}"
     echo -e "${AMARELO}ℹ️ Alvo: @$usuario | $MSG_BAN${RESET}"
     pausa
 }
@@ -229,7 +231,7 @@ while true; do
     echo -e "${CIANO}  6) 🎬 Canal do YouTube (@alisonkkj)${RESET}"
     echo -e "${VERMELHO}  7) ❌ Sair do Painel${RESET}"
     echo
-    read -p "$(echo -e "${CIANO}>> Opção: ${RESET}")" opcao
+    read -p "$(echo -e "${CIANO}>> Opção: ${RESET})" opcao
 
     case $opcao in
         1) banir_whatsapp ;;
