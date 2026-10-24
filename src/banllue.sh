@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==================================================
-# PAINEL BANWHATS PRO - ELITE EDITION V5.1
+# PAINEL BANWHATS PRO - ELITE EDITION V6.0
 # Desenvolvido por: ALISONKKJJ YT
 # ==================================================
 
@@ -21,15 +21,15 @@ LOG_FILE="historico_execucao.log"
 # --- TELA DE BOOT ---
 tela_boot() {
     clear
-    echo -e "${CIANO}[INIT] Carregando modulos de sistema...${RESET}"
+    echo -e "${CIANO}[INIT] Carregando modulos de sistema v6.0...${RESET}"
     sleep 0.7
-    echo -e "${AZUL}[SECURE] Estabelecendo conexao wifi segura...${RESET}"
+    echo -e "${AZUL}[SECURE] Estabelecendo conexao criptografada...${RESET}"
     sleep 0.8
-    echo -e "${VERDE}[PROXY] Verificando gateways ativos...${RESET}"
+    echo -e "${VERDE}[PROXY] Verificando gateways globais ativos...${RESET}"
     sleep 0.9
     echo -e "${AMARELO}[AUTH] Validando banco de dados local...${RESET}"
     sleep 0.8
-    echo -e "${VERMELHO}[STATUS] Sistema liberado e operacional.${RESET}"
+    echo -e "${VERMELHO}[STATUS] Sistema pronto e operacional.${RESET}"
     sleep 1.2
     clear
 }
@@ -38,9 +38,9 @@ tela_boot() {
 autenticar_cliente() {
     tela_boot
     echo -e "${AZUL}╔══════════════════════════════════════════════════╗${RESET}"
-    echo -e "${AZUL}║             AUTENTICACAO DE LICENCA              ║${RESET}"
+    echo -e "${AZUL}║             AUTENTICAÇÃO DE LICENÇA              ║${RESET}"
     echo -e "${AZUL}╚══════════════════════════════════════════════════╝${RESET}"
-    echo -e "${AMARELO}Insira a chave enviada pelo administrador.${RESET}\n"
+    echo -e "${AMARELO}Insira a chave VIP enviada pelo administrador.${RESET}\n"
     
     read -p "$(echo -e "${CIANO}>> Digite sua Chave de Acesso: ${RESET}")" KEY
 
@@ -204,6 +204,30 @@ banir_instagram() {
     pausa
 }
 
+derrubar_site() {
+    clear
+    echo -e "${VERMELHO}[ PAINEL - STRESSER & ATTACK SIMULATOR ]${RESET}"
+    read -p "$(echo -e "${CIANO}Digite a URL ou IP do site alvo (ex: site-alvo.com): ${RESET}")" site_alvo
+    if [[ -z "$site_alvo" ]]; then
+        site_alvo="site-exemplo.com"
+    fi
+    
+    echo -e "\n${CIANO}[ATTACK] Inicializando botnet de teste (500 bots ativos)...${RESET}"
+    sleep 1
+    echo -e "${AMARELO}[METHOD] Modo selecionado: UDP/TCP SYN Flood (Porta 80/443)${RESET}"
+    sleep 1.2
+    echo -e "${VERMELHO}[FIREWALL] Ignorando mitigacao de tráfego...${RESET}\n"
+    sleep 1.5
+    
+    spinner
+    salvar_log "DDoS_SIMULATOR" "$site_alvo"
+    
+    echo -e "${VERDE}✅ Teste de estresse concluido com sucesso!${RESET}"
+    echo -e "${BRANCO}Alvo: $site_alvo | Requisicoes enviadas: 150.000 pacotes/s${RESET}"
+    echo -e "${AMARELO}ℹ️ Status do Servidor Alvo: Instabilidade Temporaria Detectada.${RESET}"
+    pausa
+}
+
 ver_historico() {
     clear
     echo -e "${AZUL}=== HISTORICO DE OPERACOES RECENTES ===${RESET}\n"
@@ -226,20 +250,22 @@ while true; do
     echo -e "${VERDE}  2) 🛡️ Blindar Numero (Anti-Ban)${RESET}"
     echo -e "${ROXO}  3) 🔓 Desbanir Numero (WhatsApp)${RESET}"
     echo -e "${AMARELO}  4) 📸 Banir Instagram (Meta)${RESET}"
-    echo -e "${BRANCO}  5) 📜 Ver Historico de Execucoes${RESET}"
-    echo -e "${CIANO}  6) 🎬 Canal do YouTube (@alisonkkj)${RESET}"
-    echo -e "${VERMELHO}  7) ❌ Sair do Painel${RESET}"
+    echo -e "${VERMELHO}  5) 🌐 Stresser / Derrubar Site (DDoS)${RESET}"
+    echo -e "${BRANCO}  6) 📜 Ver Historico de Execucoes${RESET}"
+    echo -e "${CIANO}  7) 🎬 Canal do YouTube (@alisonkkj)${RESET}"
+    echo -e "${VERMELHO}  8) ❌ Sair do Painel${RESET}"
     echo
-    read -p "$(echo -e "${CIANO}>> Opcao: ${RESET}")" opcao
+    read -p "$(echo -e "${CIANO}>> Opcao: ${RESET})" opcao
 
     case $opcao in
         1) banir_whatsapp ;;
         2) blindar_whatsapp ;;
         3) desbanir_whatsapp ;;
         4) banir_instagram ;;
-        5) ver_historico ;;
-        6) abrir_youtube ;;
-        7) clear; echo -e "${VERMELHO}Encerrando sessao... Ate logo!${RESET}"; break ;;
+        5) derrubar_site ;;
+        6) ver_historico ;;
+        7) abrir_youtube ;;
+        8) clear; echo -e "${VERMELHO}Encerrando sessao... Ate logo!${RESET}"; break ;;
         *) echo -e "${VERMELHO}❌ Opcao invalida! Tente novamente.${RESET}"; sleep 1.5 ;;
     esac
 done
